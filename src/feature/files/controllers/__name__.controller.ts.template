@@ -1,0 +1,12 @@
+import { Controller, Get } from "@nestjs/common";
+import { <%= classify(name) %>Service } from '../services/<%= dasherize(name) %>.service';
+
+@Controller()
+export class <%= classify(name) %>Controller {
+  constructor(private readonly <%= dasherize(name) %>Service: <%= classify(name) %>Service) {}
+
+  @Get()
+  findAll() {
+    return this.<%= dasherize(name) %>Service.findAll();
+  }
+}

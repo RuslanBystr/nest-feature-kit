@@ -1,0 +1,41 @@
+{
+  "name": "@bystr/nest-feature-kit",
+  "version": "0.1.1",
+  "description": "Personal NestJS schematics for feature modules",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "schematics": "./collection.json",
+  "files": [
+    "dist",
+    "collection.json",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copy-files.js",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@angular-devkit/schematics": "^16.2.16",
+    "@schematics/angular": "^20.3.10",
+    "rxjs": "^7.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RuslanBystr/nest-feature-kit.git"
+  },
+  "author": "Ruslan Bystranskyi <ruslanbystranskij@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "nest",
+    "schematics",
+    "nestjs",
+    "generator",
+    "feature"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
