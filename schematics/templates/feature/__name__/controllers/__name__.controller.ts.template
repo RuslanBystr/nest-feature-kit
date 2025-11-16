@@ -1,0 +1,21 @@
+import { Body, Controller, Get, Post } from '@nestjs/common';
+
+import { ApiCreate<%= classify(name) %> } from '../docs';
+import { Create<%= classify(name) %>Dto } from '../dto';
+import { <%= classify(name) %>Service } from '../services/<%= dasherize(name) %>.service';
+
+@Controller()
+export class <%= classify(name) %>Controller {
+  constructor(private readonly <%= dasherize(name) %>Service: <%= classify(name) %>Service) {}
+
+  @Post()
+  @ApiCreate<%= classify(name) %>()
+  create(@Body() dto: Create<%= classify(name) %>Dto) {
+    return this.<%= dasherize(name) %>Service.create(dto);
+  }
+
+  @Get()
+  findAll() {
+    return this.<%= dasherize(name) %>Service.findAll();
+  }
+}

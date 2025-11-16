@@ -2,9 +2,9 @@
   "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "feature": {
-      "description": "Generate module",
-      "factory": "./dist/feature/index#feature",
-      "schema": "./dist/feature/schema.json"
+      "description": "Generate a feature module",
+      "factory": "./dist/index#feature",
+      "schema": "./schematics/schema.json"
     }
   }
 }

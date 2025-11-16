@@ -1,0 +1,16 @@
+import { Injectable } from "@nestjs/common";
+
+import { Create<%= classify(name) %>Dto } from '../dto';
+
+@Injectable()
+export class <%= classify(name) %>Service {
+  constructor() {}
+
+  create(dto: Create<%= classify(name) %>Dto): Promise<string> {
+    return '<%= classify(name) %> created';
+  }
+
+  findAll(): Promise<string> {
+    return 'All data';
+  }
+}
