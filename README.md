@@ -1,5 +1,7 @@
 # @bystr/nest-feature-kit
 
+[![Buy me a coffee](https://img.shields.io/badge/Ko--fi-Support-orange?style=for-the-badge&logo=ko-fi)](https://ko-fi.com/ruslanbystr)
+
 Personal NestJS feature generator library. Quickly scaffold feature modules setup and automatic `AppModule` integration.
 
 ## Features
