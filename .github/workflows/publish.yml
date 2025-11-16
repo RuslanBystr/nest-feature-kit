@@ -17,11 +17,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          registry-url: https://npm.pkg.github.com
+          registry-url: https://registry.npmjs.org
 
-      - name: Authenticate to GitHub Packages
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Authenticate to npm
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install dependencies
         run: npm install
