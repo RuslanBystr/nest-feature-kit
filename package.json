@@ -1,11 +1,11 @@
 {
   "name": "@bystr/nest-feature-kit",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Personal NestJS schematics for feature modules",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "schematics": "./collection.json",
-  "homepage": "https://ko-fi.com/ruslanbystr",
+  "homepage": "https://github.com/RuslanBystr/nest-feature-kit",
   "files": [
     "dist",
     "collection.json",
