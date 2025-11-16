@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "read-endpoint",
+  "title": "Generate Read endpoint",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Feature name"
+    },
+    "endpoints": {
+      "type": "string",
+      "default": "r"
+    }
+  },
+  "required": ["name"]
+}

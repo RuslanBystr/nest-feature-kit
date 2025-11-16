@@ -1,0 +1,10 @@
+import { applyDecorators } from '@nestjs/common';
+import { ApiBadRequestResponse, ApiBody, ApiOkResponse } from '@nestjs/swagger';
+
+export function ApiUpdate<%= classify(name) %>() {
+  return applyDecorators(
+    ApiBody({ type: 'object' }),
+    ApiOkResponse(),
+    ApiBadRequestResponse(),
+  );
+}

@@ -1,0 +1,11 @@
+import { applyDecorators } from '@nestjs/common';
+import { ApiOkResponse, ApiParam } from '@nestjs/swagger';
+
+export function ApiDelete<%= classify(name) %>() {
+  return applyDecorators(
+    ApiParam({ name: 'id', required: true }),
+    ApiOkResponse({
+      description: '<%= classify(name) %> deleted successfully',
+    }),
+  );
+}

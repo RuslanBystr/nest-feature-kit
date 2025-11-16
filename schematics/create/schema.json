@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "CreateSchema",
+  "title": "Create options",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "path": { "type": "string", "default": "src" },
+    "flat": { "type": "boolean", "default": false },
+    "endpoints": { "type": "string", "default": "c" }
+  },
+  "required": ["name"]
+}

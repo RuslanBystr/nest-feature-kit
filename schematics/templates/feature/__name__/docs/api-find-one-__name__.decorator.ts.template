@@ -1,0 +1,11 @@
+import { applyDecorators } from '@nestjs/common';
+import { ApiOkResponse, ApiParam } from '@nestjs/swagger';
+
+export function ApiFindOne<%= classify(name) %>() {
+  return applyDecorators(
+    ApiParam({ name: 'id', required: true }),
+    ApiOkResponse({
+      description: 'Get one <%= classify(name) %> by id',
+    }),
+  );
+}

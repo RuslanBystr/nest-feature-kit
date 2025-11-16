@@ -8,6 +8,7 @@ import {
     move,
     mergeWith,
     chain,
+    filter,
 } from '@angular-devkit/schematics';
 import { strings } from '@angular-devkit/core';
 import * as ts from 'typescript';
@@ -18,6 +19,21 @@ interface Schema {
     name: string;
     path?: string;
     flat?: boolean;
+    endpoints?: string;
+    create?: boolean;
+    read?: boolean;
+    update?: boolean;
+    delete?: boolean;
+}
+
+function normalizeEndpoints(options: Schema) {
+    const letters = (options.endpoints || '').toLowerCase().split('');
+    return {
+        create: !!options.create || letters.includes('c'),
+        read: !!options.read || letters.includes('r'),
+        update: !!options.update || letters.includes('u'),
+        delete: !!options.delete || letters.includes('d'),
+    };
 }
 
 function findAppModulePath(tree: Tree, basePath: string): string | null {
@@ -89,14 +105,39 @@ function buildTemplateRule(options: Schema): Rule {
         ? `${targetPath}`
         : `${targetPath}/${strings.dasherize(options.name)}`;
 
+    const flags = normalizeEndpoints(options);
+
     return mergeWith(
         apply(url('./templates/feature/__name__'), [
+            filter((filePath: string) => {
+                const p = filePath.replace(/\\/g, '/');
+
+                if (p.includes('/docs/') && p.includes('api-create-') && !flags.create) return false;
+                if (p.includes('/docs/') && p.includes('api-find-all-') && !flags.read) return false;
+                if (p.includes('/docs/') && p.includes('api-find-one-') && !flags.read) return false;
+                if (p.includes('/docs/') && p.includes('api-update-') && !flags.update) return false;
+                if (p.includes('/docs/') && p.includes('api-delete-') && !flags.delete) return false;
+
+                if (p.includes('/dto/') && p.includes('create-') && !flags.create) return false;
+                if (p.includes('/dto/') && p.includes('update-') && !flags.update) return false;
+
+                if (p.endsWith('/dto/index.ts.template') && !(flags.create || flags.update)) return false;
+                if (p.endsWith('/docs/index.ts.template') && !(flags.create || flags.read || flags.update || flags.delete)) return false;
+
+                return true;
+            }),
+
             applyTemplates({
                 name: options.name,
                 dasherize: strings.dasherize,
                 classify: strings.classify,
                 camelize: strings.camelize,
+                hasCreate: flags.create,
+                hasRead: flags.read,
+                hasUpdate: flags.update,
+                hasDelete: flags.delete,
             }),
+
             move(featureDir),
         ])
     );
@@ -104,10 +145,24 @@ function buildTemplateRule(options: Schema): Rule {
 
 export function feature(options: Schema): Rule {
     return (tree: Tree, _context: SchematicContext) => {
+        _context.logger.info(`schematic options: ${JSON.stringify(options)}`);
+
+        let endpoints = options.endpoints || '';
+
+        if (options.name.includes('-')) {
+            const [featureName, short] = options.name.split('-');
+            options.name = featureName;
+            if (!endpoints) endpoints = short;
+        }
+
+        const flags = normalizeEndpoints({ ...options, endpoints });
+
         const rules: Rule[] = [
-            buildTemplateRule(options),
+            buildTemplateRule({ ...options, ...flags }),
             addModuleImportToAppModuleRule(options),
         ];
+
         return chain(rules)(tree, _context);
     };
 }
+

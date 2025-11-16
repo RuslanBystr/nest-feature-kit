@@ -1,21 +1,58 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-
-import { ApiCreate<%= classify(name) %> } from '../docs';
-import { Create<%= classify(name) %>Dto } from '../dto';
+<%
+const docImports = [];
+if (hasCreate) docImports.push(`ApiCreate${classify(name)}`);
+if (hasRead) {
+  docImports.push(`ApiFindAll${classify(name)}`);
+  docImports.push(`ApiFindOne${classify(name)}`);
+}
+if (hasUpdate) docImports.push(`ApiUpdate${classify(name)}`);
+if (hasDelete) docImports.push(`ApiDelete${classify(name)}`);
+const dtoImports = [];
+if (hasCreate) dtoImports.push(`Create${classify(name)}Dto`);
+if (hasUpdate) dtoImports.push(`Update${classify(name)}Dto`);
+const decorators = ['Controller'];
+if (hasCreate) { decorators.push('Post', 'Body'); }
+if (hasRead) { decorators.push('Get', 'Param'); }
+if (hasUpdate) { decorators.push('Patch'); decorators.push('Body'); }
+if (hasDelete) { decorators.push('Delete'); }
+%>import { <%= Array.from(new Set(decorators)).join(', ') %> } from '@nestjs/common';
+<% if (docImports.length > 0) { %>
+import { <%= Array.from(new Set(docImports)).join(', ') %> } from '../docs';
+<% } %><% if (dtoImports.length > 0) { %>
+import { <%= dtoImports.join(', ') %> } from '../dto';<% } %>
 import { <%= classify(name) %>Service } from '../services/<%= dasherize(name) %>.service';
 
-@Controller()
+@Controller('<%= dasherize(name) %>')
 export class <%= classify(name) %>Controller {
   constructor(private readonly <%= dasherize(name) %>Service: <%= classify(name) %>Service) {}
-
+<% if (hasCreate) { %>
   @Post()
   @ApiCreate<%= classify(name) %>()
   create(@Body() dto: Create<%= classify(name) %>Dto) {
     return this.<%= dasherize(name) %>Service.create(dto);
   }
-
+<% } %><% if (hasRead) { %>
   @Get()
+  @ApiFindAll<%= classify(name) %>()
   findAll() {
     return this.<%= dasherize(name) %>Service.findAll();
   }
+
+  @Get(':id')
+  @ApiFindOne<%= classify(name) %>()
+  findOne(@Param('id') id: string) {
+    return this.<%= dasherize(name) %>Service.findOne(id);
+  }
+<% } %><% if (hasUpdate) { %>
+  @Patch(':id')
+  @ApiUpdate<%= classify(name) %>()
+  update(@Param('id') id: string, @Body() dto: Update<%= classify(name) %>Dto) {
+    return this.<%= dasherize(name) %>Service.update(id, dto);
+  }
+<% } %><% if (hasDelete) { %>
+  @Delete(':id')
+  @ApiDelete<%= classify(name) %>()
+  remove(@Param('id') id: string) {
+    return this.<%= dasherize(name) %>Service.remove(id);
+  }<% } %>
 }

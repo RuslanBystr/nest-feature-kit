@@ -1,1 +1,2 @@
-export * from './create-<%= dasherize(name) %>.dto';
+<% if (hasCreate) { %>export * from './create-<%= dasherize(name) %>.dto';<% } %>
+<% if (hasUpdate) { %>export * from './update-<%= dasherize(name) %>.dto';<% } %>

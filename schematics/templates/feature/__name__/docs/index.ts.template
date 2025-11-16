@@ -1,1 +1,5 @@
-export * from './api-create-<%= dasherize(name) %>.decorator';
+<% if (hasCreate) { %>export * from './api-create-<%= dasherize(name) %>.decorator';<% } %><% if (hasRead) { %>
+export * from './api-find-all-<%= dasherize(name) %>.decorator';
+export * from './api-find-one-<%= dasherize(name) %>.decorator';
+<% } %><% if (hasUpdate) { %>export * from './api-update-<%= dasherize(name) %>.decorator';<% } %>
+<% if (hasDelete) { %>export * from './api-delete-<%= dasherize(name) %>.decorator';<% } %>

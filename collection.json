@@ -1,10 +1,35 @@
 {
   "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
-    "feature": {
-      "description": "Generate a feature module",
+    "empty": {
       "factory": "./dist/index#feature",
-      "schema": "./schematics/schema.json"
+      "schema": "./schematics/schema.json",
+      "description": "Generate base feature without endpoints"
+    },
+    "crud": {
+      "factory": "./dist/index#feature",
+      "schema": "./schematics/crud/schema.json",
+      "description": "Generate feature with full CRUD endpoints"
+    },
+    "create": {
+      "factory": "./dist/index#feature",
+      "schema": "./schematics/create/schema.json",
+      "description": "Generate feature with only Create endpoint"
+    },
+    "read": {
+      "factory": "./dist/index#feature",
+      "schema": "./schematics/read/schema.json",
+      "description": "Generate feature with only Read endpoints"
+    },
+    "update": {
+      "factory": "./dist/index#feature",
+      "schema": "./schematics/update/schema.json",
+      "description": "Generate feature with only Update endpoint"
+    },
+    "delete": {
+      "factory": "./dist/index#feature",
+      "schema": "./schematics/delete/schema.json",
+      "description": "Generate feature with only Delete endpoint"
     }
   }
 }

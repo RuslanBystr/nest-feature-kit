@@ -1,16 +1,58 @@
-import { Injectable } from "@nestjs/common";
-
-import { Create<%= classify(name) %>Dto } from '../dto';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';<%
+  const dtoImports = [];
+  if (hasCreate) dtoImports.push(`Create${classify(name)}Dto`);
+  if (hasUpdate) dtoImports.push(`Update${classify(name)}Dto`);
+%>
+<% if (dtoImports.length > 0) { %>import { <%= dtoImports.join(', ') %> } from '../dto';<% } %>
 
 @Injectable()
 export class <%= classify(name) %>Service {
   constructor() {}
-
-  create(dto: Create<%= classify(name) %>Dto): Promise<string> {
-    return '<%= classify(name) %> created';
+<% if (hasCreate) { %>
+  async create(dto: Create<%= classify(name) %>Dto): Promise<any> {
+    try {
+      return { message: '<%= classify(name) %> created', data: dto };
+    } catch (e) {
+      throw new InternalServerErrorException('Create failed');
+    }
+  }
+<% } %><% if (hasRead) { %>
+  async findAll(): Promise<any[]> {
+    try {
+      return [];
+    } catch (e) {
+      throw new InternalServerErrorException('Find all failed');
+    }
   }
 
-  findAll(): Promise<string> {
-    return 'All data';
+  async findOne(id: string): Promise<any> {
+    try {
+      const item = null as any;
+      if (!item) throw new NotFoundException();
+      return item;
+    } catch (e) {
+      if (e instanceof NotFoundException) throw e;
+      throw new InternalServerErrorException('Find one failed');
+    }
   }
+<% } %><% if (hasUpdate) { %>
+  async update(id: string, dto: Update<%= classify(name) %>Dto): Promise<any> {
+    try {
+      const updated = { id, ...dto };
+      return updated;
+    } catch (e) {
+      throw new InternalServerErrorException('Update failed');
+    }
+  }
+<% } %><% if (hasDelete) { %>
+  async remove(id: string): Promise<any> {
+    try {
+      const existed = true;
+      if (!existed) throw new NotFoundException();
+      return { id };
+    } catch (e) {
+      if (e instanceof NotFoundException) throw e;
+      throw new InternalServerErrorException('Remove failed');
+    }
+  }<% } %>
 }

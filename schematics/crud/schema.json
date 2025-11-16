@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "CrudSchema",
+  "title": "Crud options",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Feature name"
+    },
+    "path": {
+      "type": "string",
+      "default": "src"
+    },
+    "flat": {
+      "type": "boolean",
+      "default": false
+    },
+    "endpoints": {
+      "type": "string",
+      "default": "crud",
+      "description": "Endpoints shorthand (crud)"
+    }
+  },
+  "required": ["name"]
+}

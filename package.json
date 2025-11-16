@@ -1,6 +1,6 @@
 {
   "name": "@bystr/nest-feature-kit",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Personal NestJS schematics for feature modules",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
   "files": [
     "dist",
     "collection.json",
-    "schematics/schema.json",
+    "schematics",
     "README.md"
   ],
   "scripts": {
