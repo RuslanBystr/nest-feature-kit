@@ -16,6 +16,10 @@ npm install -D @bystr/nest-feature-kit
 ```
 
 ## Usage
+### Change nest-cli.json collection
+```bash
+"collection": "@bystr/nest-feature-kit",
+```
 
 ```bash
 nest g feature <name> [options]
@@ -29,13 +33,13 @@ nest g feature <name> [options]
 ### Example
 
 ```bash
-nest g feature user --path src/modules
+nest g feature user
 ```
 
 Generates:
 
 ```
-src/modules/user/
+src/user/
 ├── user.module.ts
 ├── controllers/user.controller.ts
 ├── services/user.service.ts
