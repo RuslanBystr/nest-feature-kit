@@ -42,11 +42,17 @@ Generates:
 
 ```
 src/user/
+├── controllers
+│   └── user.controller.ts
+├── docs
+│   ├── api-create-user.decorator.ts
+│   └── index.ts
+├── dto
+│   ├── create-user.dto.ts
+│   └── index.ts
+└── services
+    └── user.service.ts
 ├── user.module.ts
-├── controllers/user.controller.ts
-├── services/user.service.ts
-├── dto/index.ts
-└── docs/index.ts
 ```
 
 `UserModule` is automatically imported in your `AppModule`.
