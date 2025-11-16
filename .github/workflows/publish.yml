@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    tags:
-      - 'v*.*.*'
 
 jobs:
   build-and-publish:
@@ -20,13 +18,15 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Authenticate to npm
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "@bystr:registry=https://registry.npmjs.org/" >> ~/.npmrc
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build package
         run: npm run build
 
       - name: Publish package
-        run: npm publish
+        run: npm publish --access public

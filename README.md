@@ -1,4 +1,4 @@
-# @byst/nest-feature-kit
+# @bystr/nest-feature-kit
 
 Personal NestJS feature generator library. Quickly scaffold feature modules setup and automatic `AppModule` integration.
 
@@ -12,7 +12,7 @@ Personal NestJS feature generator library. Quickly scaffold feature modules setu
 ## Installation
 
 ```bash
-npm install -D @byst/nest-feature-kit
+npm install -D @bystr/nest-feature-kit
 ```
 
 ## Usage
@@ -44,15 +44,6 @@ src/modules/user/
 ```
 
 `UserModule` is automatically imported in your `AppModule`.
-
-## Contributing
-
-Clone the repo, add your templates or schematics, and publish your personal version.
-
-```
-npm run build
-npm publish
-```
 
 ## License
 
