@@ -12,7 +12,8 @@ if (hasCreate) dtoImports.push(`Create${classify(name)}Dto`);
 if (hasUpdate) dtoImports.push(`Update${classify(name)}Dto`);
 const decorators = ['Controller'];
 if (hasCreate) { decorators.push('Post', 'Body'); }
-if (hasRead) { decorators.push('Get', 'Param'); }
+if (hasRead) { decorators.push('Get'); }
+if (hasRead || hasDelete) { decorators.push('Param'); }
 if (hasUpdate) { decorators.push('Patch'); decorators.push('Body'); }
 if (hasDelete) { decorators.push('Delete'); }
 %>import { <%= Array.from(new Set(decorators)).join(', ') %> } from '@nestjs/common';

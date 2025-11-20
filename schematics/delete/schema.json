@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "delete-endpoint",
+  "$id": "delete-endpoint",
   "title": "Generate Delete endpoint",
   "type": "object",
   "properties": {

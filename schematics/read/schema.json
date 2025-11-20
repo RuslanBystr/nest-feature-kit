@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "read-endpoint",
+  "$id": "read-endpoint",
   "title": "Generate Read endpoint",
   "type": "object",
   "properties": {

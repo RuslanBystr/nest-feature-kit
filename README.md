@@ -30,7 +30,7 @@ npm install -D @bystr/nest-feature-kit
 
 Command           | Generated Endpoints           | Description
 ------------------|------------------------------|---------------------------------------
-nest g feature <name> | none                         | Base feature module without endpoints
+nest g empty <name> | none                         | Base feature module without endpoints
 nest g crud <name>    | create, read, update, delete | Full CRUD feature module
 nest g create <name>  | create                        | Feature module with only Create
 nest g read <name>    | read                          | Feature module with only Read
@@ -47,7 +47,7 @@ nest g delete <name>  | delete                        | Feature module with only
 nest g crud user
 ```
 
-### Generated user crud:
+### Generated user CRUD:
 ```
 src/user/
 ├── controllers

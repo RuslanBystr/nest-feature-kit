@@ -3,7 +3,7 @@
   "schematics": {
     "empty": {
       "factory": "./dist/index#feature",
-      "schema": "./schematics/schema.json",
+      "schema": "./schematics/empty/schema.json",
       "description": "Generate base feature without endpoints"
     },
     "crud": {
